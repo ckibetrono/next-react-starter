@@ -1,0 +1,91 @@
+<!-- index.html -->
+<html>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js">
+    </script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js">
+    </script>
+   <!-- Babel Script -->
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+   <script type="text/jsx">
+     const app = document.getElementById('app');
+
+     function Header(props) {
+      return <h1>{props.title}</h1>;
+     }
+     function HomePage() {
+      const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton']; 
+
+      const [likes, setLikes] = React.useState(0); 
+
+     function handleClick() {
+      setLikes(likes + 1);
+      console.log("increment like count")
+     } 
+
+      return <div>
+        {/* Nesting the Header component */}
+        <Header title="Develop. Preview. Ship. 🚀" />
+        <Header title="React ❤️"/>
+        <Header title="A new wave🌊"/>
+        <ul> 
+          {names.map((name) => 
+              <li key={name}>{name}</li>
+            )}
+        </ul>
+        <button onClick={handleClick}>Like({likes})</button>
+      </div>;
+     }
+
+     ReactDOM.render(<HomePage />, app);
+   </script>
+  </body>
+</html>
+<!-- 
+  Using variables in JSX 
+  1. An object property with dot notation
+      function Header(props) {
+        return <h1>{props.title}</h1>;
+      }
+
+  2. A template literal 
+      function Header({ title }) {
+        return <h1>{`Cool ${title}`}</h1>;
+      }
+
+  3. The returned value of a function 
+      function createTitle(title) {
+        if (title) {
+          return title;
+        } else {
+          return 'Default title';
+        }
+      }
+      function Header({ title }) {
+          return <h1>{createTitle(title)}</h1>;
+      }
+
+  4. Or ternary operators 
+      You can now pass any string to your title prop, and since you’ve accounted 
+      for the default case in your component with the ternary operator, you could
+       even not pass a title prop at all:
+       function Header({ title }) {
+          return <h1>{title ? title : 'Default title'}</h1>;
+        }
+
+        function HomePage() {
+          return (
+            <div>
+              <Header />
+            </div>
+          );
+        }
+
+        Note: Unlike props which are passed to components as the first function 
+        parameter, the state is initiated and stored within a component. You can 
+        pass the state information to children components as props, but the logic 
+        for updating the state should be kept within the component where state was 
+        initially created.
+-->
